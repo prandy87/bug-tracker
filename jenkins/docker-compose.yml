@@ -5,6 +5,7 @@ services:
     privileged: true
     environment:
       - DOCKER_TLS_CERTDIR=/certs
+      - HOSTNAME=0.0.0.0
     volumes:
       - jenkins-docker-certs:/certs/client
       - jenkins-data:/var/jenkins_home
