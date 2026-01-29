@@ -38,16 +38,13 @@ pipeline {
                     export HOME="$PWD"
                     export GOCACHE="$PWD/.gocache"
                     export GOMODCACHE="$PWD/.gomodcache"
-
                     go test -v ./...
-
                     '''
                 }
             }
         }
         stage('Unit Tests - Frontend') {
-            agent{
-        
+            agent{       
                 docker {
                     image 'node:20' 
                     reuseNode true 
