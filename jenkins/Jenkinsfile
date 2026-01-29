@@ -2,11 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Unit Tests - Backend') {
             steps {
-                echo 'Hello World'
-                sh 'echo "Hello Jenkins"'
-                sh 'date'
+                dir('bugtracker-backend') {
+//                  we add -v which means 'verbose' to see detailed test output
+//                  and ./... to run tests in all subdirectories
+//                  go being the command to run Go programs          
+                    go test -v ./...
+                }
             }
         }
     }
