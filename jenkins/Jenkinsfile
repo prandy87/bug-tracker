@@ -32,6 +32,7 @@ pipeline {
 //                  What I added here is to set HOME, GOCACHE and GOMODCACHE to the current working directory
 //                  This will ensure that the Go cache and module cache are created in the workspace.            
 //                  This should fix the permissions issue.
+//                export means to set environment variables in shell.
                     sh ''' 
                     set -eux
                     export HOME="$PWD"
