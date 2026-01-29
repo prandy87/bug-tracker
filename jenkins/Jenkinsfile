@@ -21,8 +21,26 @@ pipeline {
 //                  we add -v which means 'verbose' to see detailed test output
 //                  and ./... to run tests in all subdirectories
 //                  go being the command to run Go programs 
-//                  but we need to wrap it in shell commands          
-                    sh 'go test -v ./...'
+//                  but we need to wrap it in shell commands.
+//
+//                  BUT
+//                  when I first tried to run the tests as is, in Jenkins environment,
+//                  I ran into a golang .cache permissions issue. 
+//                  so we use triple single quotes to wrap multiple lines of shell commands    
+//                  and set -eux to make the shell exit on errors and print commands as they are executed
+//                  I need to set the env variable before running the tests.   
+//                  What I added here is to set HOME, GOCACHE and GOMODCACHE to the current working directory
+//                  This will ensure that the Go cache and module cache are created in the workspace.            
+//                  This should fix the permissions issue.
+                    sh ''' 
+                    set -eux
+                    export HOME="$PWD"
+                    export GOCACHE="$PWD/.gocache"
+                    export GOMODCACHE="$PWD/.gomodcache"
+
+                    go test -v ./...
+
+                    '''
                 }
             }
         }
