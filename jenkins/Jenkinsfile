@@ -3,6 +3,19 @@ pipeline {
 
     stages {
         stage('Unit Tests - Backend') {
+// we are going to add an agent to this stage.  
+// Reason : we need a docker image with Go installed to run our Go tests
+// Teacher has his own docker image on dockerhub, we will use it, it is called snakee/golang-junit:1.21,
+// which means it has Go version 1.21 installed along with junit xml output support.
+// Junit will be needed later to run some unit tests. 
+// we also add reusenode true to speed up the process by reusing existing containers. 
+        agent {
+            docker {
+                image 'snakee/golang-junit:1.21' 
+                reusenode true 
+            }
+        }
+//            
             steps {
                 dir('bugtracker-backend') {
 //                  we add -v which means 'verbose' to see detailed test output
