@@ -45,25 +45,25 @@ pipeline {
                 }
             }
         }
-         stage('Unit Tests - Frontend') {
-        agent{
+        stage('Unit Tests - Frontend') {
+            agent{
         
-            docker {
-                image 'node:20' 
-                reuseNode true 
+                docker {
+                    image 'node:20' 
+                    reuseNode true 
+                }
             }
-        }
-        steps {
-            dir('bugtracker-frontend') {
-//              npm ci will install dependencies based on package-lock.json
-//              npm test will run the tests defined in package.json                
-                sh '''
-                set -eux
-                npm ci
-                npm test
-                '''
+            steps {
+                dir('bugtracker-frontend') {
+//                  npm ci will install dependencies based on package-lock.json
+//                  npm test will run the tests defined in package.json                
+                    sh '''
+                    set -eux
+                    npm ci
+                    npm test
+                    '''
+                }
             }
         }
     }
-   
 }
