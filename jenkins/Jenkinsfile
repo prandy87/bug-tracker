@@ -53,7 +53,14 @@ pipeline {
             steps {
                 dir('bugtracker-frontend') {
 //                  npm ci will install dependencies based on package-lock.json
-//                  npm test will run the tests defined in package.json                
+//                  npm test will run the tests defined in package.json         
+//                package.json contains the tests to be run by npm test command in the lines "scripts"
+//                "scripts": {
+//                        "test": "jest --coverage ..."
+//                         } 
+//              why does this work : 
+//              because npm test command looks for the "test" script in package.json and runs it.
+//              again we use triple single quotes to wrap multiple lines of shell commands     
                     sh '''
                     set -eux
                     npm ci
