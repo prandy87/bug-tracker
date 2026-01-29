@@ -8,11 +8,11 @@ pipeline {
 // Teacher has his own docker image on dockerhub, we will use it, it is called snakee/golang-junit:1.21,
 // which means it has Go version 1.21 installed along with junit xml output support.
 // Junit will be needed later to run some unit tests. 
-// we also add reusenode true to speed up the process by reusing existing containers. 
+// we also add reusenode true to speed up the process by reusing existing containers throughout the pipeline.
         agent {
             docker {
                 image 'snakee/golang-junit:1.21' 
-                reusenode true 
+                reuseNode true 
             }
         }
 //            
